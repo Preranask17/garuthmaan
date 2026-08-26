@@ -18,21 +18,27 @@ export default function Header() {
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = navItems.map(item => item.href.substring(1));
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top >= 0 && rect.top <= 300) {
-            setActiveSection(section);
-            break;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
           }
-        }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "-20% 0px -65% 0px",
+        threshold: 0,
       }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    );
+
+    navItems.forEach((item) => {
+      const element = document.getElementById(item.href.substring(1));
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -45,19 +51,21 @@ export default function Header() {
           </div>
         </div>
 
+        {/* Desktop Nav */}
         <div className="hidden md:flex gap-6">
           {navItems.map(item => (
             <motion.a 
               key={item.name} 
               href={item.href}
-              whileHover={{ scale: 1.05, color: "#FFD700" }}
-              className={`text-xs font-mono tracking-widest uppercase transition-colors ${activeSection === item.href.substring(1) ? "text-[#FFD700]" : "text-slate-300"}`}
+              whileHover={{ scale: 1.05 }}
+              className={`text-xs font-mono tracking-widest uppercase transition-colors ${activeSection === item.href.substring(1) ? "text-[#FFD700]" : "text-gray-400 hover:text-white"}`}
             >
               {item.name}
             </motion.a>
           ))}
         </div>
 
+        {/* Action Buttons (Right) */}
         <div className="hidden md:flex gap-3">
           <a href="#contact" className="btn-glass">Workshop</a>
           <a href="#contact" className="btn-gold">Join</a>
@@ -68,6 +76,7 @@ export default function Header() {
         </button>
       </nav>
 
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {isOpen && (
           <motion.div 
