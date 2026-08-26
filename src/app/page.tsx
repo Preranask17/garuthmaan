@@ -6,6 +6,7 @@ import Milestones from '@/components/Milestones';
 import Hangar from '@/components/Hangar';
 import Blogs from '@/components/Blogs';
 import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <Hangar/>
         <Blogs/>
         <Contact/>
+        <Footer/>
       </div>
     </main>
   );
