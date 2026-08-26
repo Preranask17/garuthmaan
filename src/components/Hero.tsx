@@ -5,15 +5,14 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 px-4">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center z-10"
-      >
-        <div className="text-gold font-mono tracking-[0.5em] uppercase mb-4">Exploring New Frontiers</div>
-        <h1 className="text-7xl md:text-9xl font-black text-gold tracking-tighter">TEAM GARUTHMAAN</h1>
-      </motion.div>
+    <section className="min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20">
+      <div className="eyebrow mb-4">Students First. Hardware Always.</div>
+      <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-6 max-w-3xl">ENGINEERING BEYOND THE CLASSROOM</h1>
+      <p className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-2xl mb-10">We are a collective of engineering students across different branches with an inordinate passion for flight. We design, test, break, and fly custom RC aircraft—learning practical engineering by actually doing it.</p>
+      <div className="flex gap-4">
+        <button className="btn-gold">Explore Our Work</button>
+        <button className="btn-glass">Meet the Team</button>
+      </div>
     </section>
   );
 };
