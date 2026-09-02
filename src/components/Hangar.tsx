@@ -24,35 +24,35 @@ export default function Hangar() {
   // Helper to adjust spans to create a gapless mosaic pattern
   const getGridClasses = (i: number) => {
     const patterns = [
-      "md:col-span-2 md:row-span-2 min-h-[400px]", // Large featured
-      "min-h-[300px]",                            // Standard
-      "min-h-[300px]",                            // Standard
-      "md:col-span-2 min-h-[300px]",              // Wide banner
-      "min-h-[300px]",                            // Standard
-      "md:row-span-2 min-h-[400px]"               // Tall portrait
+      "md:col-span-2 md:row-span-2 aspect-[4/3] md:aspect-auto", // Large featured
+      "aspect-square",                                          // Standard
+      "aspect-square",                                          // Standard
+      "md:col-span-2 aspect-[16/9] md:aspect-auto",             // Wide banner
+      "aspect-square",                                          // Standard
+      "md:row-span-2 aspect-[3/4] md:aspect-auto"               // Tall portrait
     ];
     return patterns[i % 6];
   };
 
   return (
-    <section id="hangar" className="py-20 px-0 max-w-full">
+    <section id="hangar" className="py-20 px-4 max-w-7xl mx-auto">
       <div className="eyebrow text-center mb-2">THE HANGAR</div>
       <h3 className="text-3xl sm:text-5xl font-bold tracking-tight text-white text-center mb-16">A treasure trove of planes that were built…</h3>
       
-      {/* Gapless Mosaic Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-0 auto-rows-fr grid-flow-dense">
+      {/* Asymmetric Mosaic Grid with 10px gaps */}
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2.5 auto-rows-fr grid-flow-dense">
         {hangarImages.map((item, i) => (
           <motion.div 
             key={item.id}
             whileHover={{ scale: 1.02 }}
-            className={`relative overflow-hidden cursor-pointer ${getGridClasses(i)}`}
+            className={`relative overflow-hidden rounded-lg cursor-pointer group ${getGridClasses(i)}`}
             onClick={() => setSelected(i)}
           >
             <Image 
                 src={item.src} 
-                alt="Aircraft" 
+                alt="Aircraft Gallery" 
                 fill 
-                className="object-cover w-full h-full" 
+                className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105" 
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" 
                 onError={(e) => (e.currentTarget.src = "/default-aero.jpg")} 
             />
@@ -69,7 +69,7 @@ export default function Hangar() {
           >
             <motion.div className="relative p-0 max-w-5xl w-full" onClick={e => e.stopPropagation()}>
               <button className="absolute -top-12 right-0 text-white text-2xl z-10" onClick={() => setSelected(null)}>✕</button>
-              <div className="relative aspect-video rounded-lg overflow-hidden border border-white/15">
+              <div className="relative aspect-video rounded-none overflow-hidden">
                 <Image 
                     src={hangarImages[selected].src} 
                     alt="Aircraft" 
