@@ -5,17 +5,17 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 const hangarImages = [
-  { id: 1, src: "/Hangar/photo1.jpg", title: "Vayu Mk. I", tag: "SAE 2024", desc: "Prototype construction." },
-  { id: 2, src: "/Hangar/photo2.jpg", title: "Vayu Mk. II", tag: "SAE 2026", desc: "High payload carbon fiber." },
-  { id: 3, src: "/Hangar/photo3.jpg", title: "Athena DBF", tag: "AIAA 2025", desc: "Multi-mission optimization." },
-  { id: 4, src: "/Hangar/photo4.jpg", title: "Wiring Setup", tag: "AVIONICS", desc: "Avionics and integration." },
-  { id: 5, src: "/Hangar/photo5.jpg", title: "Wind Tunnel", tag: "ANALYSE", desc: "Airfoil testing." },
-  { id: 6, src: "/Hangar/photo6.jpg", title: "First Flight", tag: "TESTING", desc: "Maiden flight." },
-  { id: 7, src: "/Hangar/photo7.jpg", title: "Carbon Layup", tag: "BUILD", desc: "Fiber reinforcement." },
-  { id: 8, src: "/Hangar/photo8.jpg", title: "CAD Model", tag: "DESIGN", desc: "Fusion 360 assembly." },
-  { id: 9, src: "/Hangar/photo9.jpg", title: "Fuselage", tag: "BUILD", desc: "Tapered fuselage work." },
-  { id: 10, src: "/Hangar/photo10.jpg", title: "Ground Test", tag: "TESTING", desc: "Thrust verification." },
-  { id: 11, src: "/Hangar/photo11.jpg", title: "Team Hangar", tag: "TEAM", desc: "Workshop overview." },
+  { id: 1, src: "/Hangar/photo1.jpeg", title: "Vayu Mk. I", tag: "SAE 2024", desc: "First prototype construction." },
+  { id: 2, src: "/Hangar/photo2.jpeg", title: "Vayu Mk. II", tag: "SAE 2026", desc: "Carbon fiber reinforced." },
+  { id: 3, src: "/Hangar/photo3.jpeg", title: "Athena DBF", tag: "AIAA 2025", desc: "Multi-mission optimization." },
+  { id: 4, src: "/Hangar/photo4.jpeg", title: "Wiring Setup", tag: "AVIONICS", desc: "Avionics and integration." },
+  { id: 5, src: "/Hangar/photo5.jpeg", title: "Wind Tunnel", tag: "ANALYSE", desc: "Airfoil testing." },
+  { id: 6, src: "/Hangar/photo6.jpeg", title: "Maiden Flight", tag: "TESTING", desc: "Maiden flight." },
+  { id: 7, src: "/Hangar/photo7.jpeg", title: "Carbon Layup", tag: "BUILD", desc: "Fiber reinforcement." },
+  { id: 8, src: "/Hangar/photo8.jpeg", title: "CAD Model", tag: "DESIGN", desc: "Fusion 360 assembly." },
+  { id: 9, src: "/Hangar/photo9.jpeg", title: "Fuselage", tag: "BUILD", desc: "Tapered fuselage work." },
+  { id: 10, src: "/Hangar/photo10.jpeg", title: "Ground Test", tag: "TESTING", desc: "Thrust verification." },
+  { id: 11, src: "/Hangar/photo11.jpeg", title: "Team Hangar", tag: "TEAM", desc: "Workshop overview." },
 ];
 
 export default function Hangar() {
