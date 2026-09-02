@@ -21,27 +21,34 @@ const hangarImages = [
 export default function Hangar() {
   const [selected, setSelected] = useState<number | null>(null);
 
+  const getGridClasses = (i: number) => {
+    if (i % 6 === 0) return "md:col-span-2 md:row-span-2 aspect-[16/10]"; // Large featured
+    if (i % 6 === 3) return "md:col-span-2 aspect-[16/7]"; // Wide banner
+    if (i % 6 === 5) return "md:row-span-2 aspect-[9/16]"; // Tall portrait
+    return "aspect-[4/3]"; // Standard
+  };
+
   return (
     <section id="hangar" className="py-20 px-4 max-w-7xl mx-auto">
       <div className="eyebrow text-center mb-2">THE HANGAR</div>
       <h3 className="text-3xl sm:text-5xl font-bold tracking-tight text-white text-center mb-16">A treasure trove of planes that were built…</h3>
       
-      {/* Mosaic Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Asymmetric Mosaic Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-fr grid-flow-dense">
         {hangarImages.map((item, i) => (
           <motion.div 
             key={item.id}
-            whileHover={{ scale: 1.03 }}
-            className={`glass-panel p-2 rounded-xl overflow-hidden cursor-pointer group ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
+            whileHover={{ scale: 1.02 }}
+            className={`glass-panel p-1 rounded-xl overflow-hidden cursor-pointer border border-white/10 hover:border-[#FFD700] transition-colors ${getGridClasses(i)}`}
             onClick={() => setSelected(i)}
           >
-            <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
+            <div className="relative w-full h-full rounded-lg overflow-hidden">
                 <Image 
                     src={item.src} 
-                    alt="Aircraft Gallery" 
+                    alt="Aircraft" 
                     fill 
                     className="object-cover" 
-                    sizes="(max-width: 768px) 100vw, 33vw" 
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                     onError={(e) => (e.currentTarget.src = "/default-aero.jpg")} 
                 />
             </div>
