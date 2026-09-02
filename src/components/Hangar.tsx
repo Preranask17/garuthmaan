@@ -24,12 +24,12 @@ export default function Hangar() {
   // Helper to adjust spans to create a gapless mosaic pattern
   const getGridClasses = (i: number) => {
     const patterns = [
-      "md:col-span-2 md:row-span-2", // Large featured
-      "",                             // Standard
-      "",                             // Standard
-      "md:col-span-2",                // Wide banner
-      "",                             // Standard
-      "md:row-span-2"                 // Tall portrait
+      "md:col-span-2 md:row-span-2 min-h-[400px]", // Large featured
+      "min-h-[300px]",                            // Standard
+      "min-h-[300px]",                            // Standard
+      "md:col-span-2 min-h-[300px]",              // Wide banner
+      "min-h-[300px]",                            // Standard
+      "md:row-span-2 min-h-[400px]"               // Tall portrait
     ];
     return patterns[i % 6];
   };
@@ -48,16 +48,14 @@ export default function Hangar() {
             className={`relative overflow-hidden cursor-pointer ${getGridClasses(i)}`}
             onClick={() => setSelected(i)}
           >
-            <div className="relative w-full h-full aspect-[4/3] md:aspect-auto">
-                <Image 
-                    src={item.src} 
-                    alt="Aircraft" 
-                    fill 
-                    className="object-cover w-full h-full" 
-                    sizes="(max-width: 768px) 100vw, 25vw" 
-                    onError={(e) => (e.currentTarget.src = "/default-aero.jpg")} 
-                />
-            </div>
+            <Image 
+                src={item.src} 
+                alt="Aircraft" 
+                fill 
+                className="object-cover w-full h-full" 
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" 
+                onError={(e) => (e.currentTarget.src = "/default-aero.jpg")} 
+            />
           </motion.div>
         ))}
       </div>
@@ -71,7 +69,7 @@ export default function Hangar() {
           >
             <motion.div className="relative p-0 max-w-5xl w-full" onClick={e => e.stopPropagation()}>
               <button className="absolute -top-12 right-0 text-white text-2xl z-10" onClick={() => setSelected(null)}>✕</button>
-              <div className="relative aspect-video overflow-hidden">
+              <div className="relative aspect-video rounded-lg overflow-hidden border border-white/15">
                 <Image 
                     src={hangarImages[selected].src} 
                     alt="Aircraft" 
