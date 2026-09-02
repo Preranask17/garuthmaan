@@ -21,15 +21,16 @@ const hangarImages = [
 export default function Hangar() {
   const [selected, setSelected] = useState<number | null>(null);
 
-  // Helper to adjust spans to create a mosaic pattern
+  // Helper to adjust spans to create a dense mosaic pattern
   const getGridClasses = (i: number) => {
+    // Patterns optimized for a 5-column grid
     const patterns = [
-      "md:col-span-2 md:row-span-2 aspect-[4/3] md:aspect-auto", // Large featured
-      "aspect-square",                                          // Standard
-      "aspect-square",                                          // Standard
-      "md:col-span-2 aspect-[16/9] md:aspect-auto",             // Wide banner
-      "aspect-square",                                          // Standard
-      "md:row-span-2 aspect-[3/4] md:aspect-auto"               // Tall portrait
+      "md:col-span-2 md:row-span-2 aspect-[4/3]", // Featured landscape
+      "aspect-square",                            // Standard square
+      "aspect-[3/4]",                             // Portrait
+      "md:col-span-2 aspect-[16/9]",              // Wide banner
+      "aspect-square",                            // Standard
+      "md:row-span-2 aspect-[3/4]"                // Tall portrait
     ];
     return patterns[i % 6];
   };
@@ -39,8 +40,8 @@ export default function Hangar() {
       <div className="eyebrow text-center mb-2">THE HANGAR</div>
       <h3 className="text-3xl sm:text-5xl font-bold tracking-tight text-white text-center mb-16">A treasure trove of planes that were built…</h3>
       
-      {/* Mosaic Grid with 10px gaps and subtle gold borders */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2.5 auto-rows-fr grid-flow-dense">
+      {/* Dense Mosaic Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2.5 auto-rows-fr grid-flow-dense">
         {hangarImages.map((item, i) => (
           <motion.div 
             key={item.id}
@@ -52,8 +53,8 @@ export default function Hangar() {
                 src={item.src} 
                 alt="Aircraft" 
                 fill 
-                className="object-cover w-full h-full transition-transform duration-500 hover:scale-105" 
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" 
+                className="object-cover object-center w-full h-full transition-transform duration-500 hover:scale-105" 
+                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 20vw, 15vw" 
                 onError={(e) => (e.currentTarget.src = "/default-aero.jpg")} 
             />
           </motion.div>
