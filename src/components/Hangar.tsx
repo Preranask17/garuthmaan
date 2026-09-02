@@ -21,7 +21,7 @@ const hangarImages = [
 export default function Hangar() {
   const [selected, setSelected] = useState<number | null>(null);
 
-  // Helper to adjust spans to create a gapless mosaic pattern
+  // Helper to adjust spans to create a mosaic pattern
   const getGridClasses = (i: number) => {
     const patterns = [
       "md:col-span-2 md:row-span-2 aspect-[4/3] md:aspect-auto", // Large featured
@@ -39,20 +39,20 @@ export default function Hangar() {
       <div className="eyebrow text-center mb-2">THE HANGAR</div>
       <h3 className="text-3xl sm:text-5xl font-bold tracking-tight text-white text-center mb-16">A treasure trove of planes that were built…</h3>
       
-      {/* Asymmetric Mosaic Grid with 10px gaps */}
+      {/* Mosaic Grid with 10px gaps and subtle gold borders */}
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2.5 auto-rows-fr grid-flow-dense">
         {hangarImages.map((item, i) => (
           <motion.div 
             key={item.id}
             whileHover={{ scale: 1.02 }}
-            className={`relative overflow-hidden rounded-lg cursor-pointer group ${getGridClasses(i)}`}
+            className={`relative overflow-hidden rounded-lg cursor-pointer border border-[#FFD700]/20 hover:border-[#FFD700]/70 transition-all duration-300 ${getGridClasses(i)}`}
             onClick={() => setSelected(i)}
           >
             <Image 
                 src={item.src} 
-                alt="Aircraft Gallery" 
+                alt="Aircraft" 
                 fill 
-                className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105" 
+                className="object-cover w-full h-full transition-transform duration-500 hover:scale-105" 
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" 
                 onError={(e) => (e.currentTarget.src = "/default-aero.jpg")} 
             />
