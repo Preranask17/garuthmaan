@@ -57,7 +57,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Copyright Bar */}
       <div className="max-w-7xl mx-auto border-t border-white/5 mt-12 pt-8 flex justify-between items-center text-xs text-gray-500 font-mono">
         <p>© 2026 Team Garuthmaan. All rights reserved.</p>
         <p>Jyothy Institute of Technology</p>

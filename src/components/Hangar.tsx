@@ -12,7 +12,7 @@ export default function Hangar() {
   const [selected, setSelected] = useState<number | null>(null);
 
   return (
-    <section id="hangar" className="py-24 px-4 max-w-7xl mx-auto">
+    <section id="hangar" className="py-20 px-4 max-w-7xl mx-auto">
       <div className="eyebrow mb-2 text-center">THE HANGAR</div>
       <h3 className="text-3xl sm:text-4xl font-bold text-white text-center mb-16">A treasure trove of planes that were built…</h3>
       

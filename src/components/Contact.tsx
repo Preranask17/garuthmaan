@@ -9,7 +9,7 @@ export default function Contact() {
   const [modal, setModal] = useState<"join" | "sponsor" | null>(null);
 
   return (
-    <section id="contact" className="py-24 px-4 max-w-7xl mx-auto">
+    <section id="contact" className="py-20 px-4 max-w-7xl mx-auto">
       <div className="eyebrow text-center mb-2">NO EXPERIENCE REQUIRED. JUST CURIOSITY.</div>
       <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-16">GET IN THE WORKSHOP</h2>
       

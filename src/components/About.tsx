@@ -12,7 +12,7 @@ const operations = [
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-4 max-w-7xl mx-auto">
+    <section id="about" className="py-20 px-4 max-w-7xl mx-auto">
       <div className="eyebrow mb-2">HOW WE OPERATE</div>
       <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-16">ENGINEERING BEYOND THE CLASSROOM</h2>
       

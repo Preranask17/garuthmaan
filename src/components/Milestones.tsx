@@ -12,7 +12,7 @@ const milestones = [
 
 export default function Milestones() {
   return (
-    <section id="milestones" className="py-24 px-4 max-w-7xl mx-auto">
+    <section id="milestones" className="py-20 px-4 max-w-7xl mx-auto">
       <div className="eyebrow mb-2">OUR JOURNEY</div>
       <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-16">BUILT ACROSS YEARS, NOT JUST SEASONS</h2>
       
