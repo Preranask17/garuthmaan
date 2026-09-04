@@ -33,29 +33,30 @@ export default function Hangar() {
   }, []);
 
   const getGridClasses = (aspectRatio: string | undefined, i: number) => {
-    // 1. Sanity Mapping
     if (sanityImages.length > 0 && aspectRatio) {
       switch(aspectRatio) {
-        case "hero": return "md:col-span-8 md:row-span-2";
-        case "tall": return "md:col-span-4 md:row-span-2";
-        case "medium": return "md:col-span-6 md:row-span-1";
-        case "square": return "md:col-span-3 md:row-span-1";
-        case "banner": return "md:col-span-7 md:row-span-1";
-        case "compact": return "md:col-span-5 md:row-span-1";
-        default: return "md:col-span-3 md:row-span-1";
+        case "hero-large": return "col-span-12 md:col-span-8 row-span-3";
+        case "hero-portrait": return "col-span-12 md:col-span-6 row-span-4";
+        case "tall-medium": return "col-span-6 md:col-span-4 row-span-3";
+        case "tall-small": return "col-span-6 md:col-span-3 row-span-2";
+        case "wide-banner": return "col-span-12 md:col-span-12 row-span-1";
+        case "wide-medium": return "col-span-12 md:col-span-8 row-span-2";
+        case "wide-small": return "col-span-6 md:col-span-4 row-span-1";
+        case "square-large": return "col-span-6 md:col-span-4 row-span-2";
+        case "square-small": return "col-span-6 md:col-span-3 row-span-1";
+        case "micro-accent": return "col-span-6 md:col-span-2 row-span-1";
+        default: return "col-span-6 md:col-span-3 row-span-1";
       }
     }
-    // 2. Fallback Mosaic Pattern (12-column logic)
+    // Fallback pattern
     const patterns = [
-      "md:col-span-8 md:row-span-2", // Tile 0: Featured Hero
-      "md:col-span-4 md:row-span-2", // Tile 1: Tall Vertical
-      "md:col-span-6 md:row-span-1", // Tile 2: Medium Landscape
-      "md:col-span-3 md:row-span-1", // Tile 3: Small Square
-      "md:col-span-3 md:row-span-1", // Tile 4: Small Square
-      "md:col-span-7 md:row-span-1", // Tile 5: Wide Banner
-      "md:col-span-5 md:row-span-1", // Tile 6: Compact Accent
+      "col-span-12 md:col-span-8 row-span-3",
+      "col-span-6 md:col-span-4 row-span-2",
+      "col-span-6 md:col-span-4 row-span-1",
+      "col-span-12 md:col-span-8 row-span-2",
+      "col-span-6 md:col-span-4 row-span-1"
     ];
-    return patterns[i % 7];
+    return patterns[i % 5];
   };
 
   const images = sanityImages.length > 0 ? sanityImages : hangarImages;
@@ -65,18 +66,17 @@ export default function Hangar() {
       <div className="eyebrow text-center mb-2">THE HANGAR</div>
       <h3 className="text-3xl sm:text-5xl font-bold tracking-tight text-white text-center mb-16">A treasure trove of planes that were built…</h3>
       
-      {/* 12-Column Dense Auto-flow Mosaic Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-[10px] auto-rows-[200px] md:auto-rows-[220px] grid-flow-row-dense">
+      <div className="grid grid-cols-12 gap-2.5 auto-rows-[180px] md:auto-rows-[220px] grid-flow-row-dense">
         {images.map((item: any, i: number) => (
           <motion.div 
             key={item._id || item.id}
             whileHover={{ scale: 1.02 }}
-            className={`relative overflow-hidden rounded-lg cursor-pointer border border-[#FFD700]/20 hover:border-[#FFD700]/70 transition-all duration-300 group ${getGridClasses(item.aspectRatio, i)}`}
+            className={`relative overflow-hidden rounded-lg cursor-pointer border border-[#FFD700]/20 hover:border-[#FFD700]/70 transition-all duration-300 group ${sanityImages.length > 0 ? getGridClasses(item.aspectRatio, i) : getGridClasses("default", i)}`}
             onClick={() => setSelected(i)}
           >
             <Image 
                 src={sanityImages.length > 0 ? urlFor(item.image).url() : item.src} 
-                alt="Hangar Photo" 
+                alt="Aircraft" 
                 fill 
                 className="object-cover object-center w-full h-full transition-transform duration-300 group-hover:scale-105" 
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" 
