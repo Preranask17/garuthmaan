@@ -5,23 +5,38 @@ export default defineType({
   title: 'Hangar Photo',
   type: 'document',
   fields: [
-    defineField({ name: 'title', title: 'Title', type: 'string' }),
-    defineField({ name: 'image', title: 'Image', type: 'image', options: { hotspot: true } }),
+    defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+    }),
+    defineField({
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
     defineField({
       name: 'aspectRatio',
       title: 'Aspect Ratio',
       type: 'string',
       options: {
         list: [
-          { title: 'Featured Hero', value: 'hero' },
-          { title: 'Tall Vertical', value: 'tall' },
-          { title: 'Medium Landscape', value: 'medium' },
-          { title: 'Small Square', value: 'square' },
-          { title: 'Wide Banner', value: 'banner' },
-          { title: 'Compact Accent', value: 'compact' },
+          { title: 'Hero (Large)', value: 'hero' },
+          { title: 'Tall', value: 'tall' },
+          { title: 'Medium', value: 'medium' },
+          { title: 'Square', value: 'square' },
+          { title: 'Banner', value: 'banner' },
+          { title: 'Compact', value: 'compact' },
         ],
       },
     }),
-    defineField({ name: 'publishedAt', title: 'Published at', type: 'datetime' }),
+    defineField({
+      name: 'publishedAt',
+      title: 'Published At',
+      type: 'datetime',
+    }),
   ],
 });
