@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { client } from "@/sanity/client";
 
 const milestones = [
   { year: "2024", title: "Team Founded", status: "COMPLETED" },
@@ -11,10 +12,17 @@ const milestones = [
 ];
 
 export default function Milestones() {
+  const [data, setData] = useState<any>(null);
+
+  useEffect(() => {
+    client.fetch(`*[_type == "aboutSection"][0]`).then(setData);
+  }, []);
+
   return (
     <section id="milestones" className="py-20 px-4 max-w-7xl mx-auto">
-      <div className="eyebrow mb-2">OUR JOURNEY</div>
-      <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-16">BUILT ACROSS YEARS, NOT JUST SEASONS</h2>
+      <h3 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-16 text-center">
+        {data?.milestonesTitle || "MILESTONES"}
+      </h3>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {milestones.map((m, i) => (
