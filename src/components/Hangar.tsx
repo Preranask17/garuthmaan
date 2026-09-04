@@ -48,12 +48,12 @@ export default function Hangar() {
         default: return "col-span-6 md:col-span-3 row-span-1";
       }
     }
-    // Fallback pattern
+    // Fallback pattern (12-column grid)
     const patterns = [
       "col-span-12 md:col-span-8 row-span-3",
       "col-span-6 md:col-span-4 row-span-2",
       "col-span-6 md:col-span-4 row-span-1",
-      "col-span-12 md:col-span-8 row-span-2",
+      "col-span-12 md:col-span-12 row-span-1",
       "col-span-6 md:col-span-4 row-span-1"
     ];
     return patterns[i % 5];
@@ -66,7 +66,8 @@ export default function Hangar() {
       <div className="eyebrow text-center mb-2">THE HANGAR</div>
       <h3 className="text-3xl sm:text-5xl font-bold tracking-tight text-white text-center mb-16">A treasure trove of planes that were built…</h3>
       
-      <div className="grid grid-cols-12 gap-2.5 auto-rows-[180px] md:auto-rows-[220px] grid-flow-row-dense">
+      {/* 12-Column Dense Auto-flow Mosaic Grid */}
+      <div className="grid grid-cols-12 gap-[10px] auto-rows-[180px] grid-flow-row-dense">
         {images.map((item: any, i: number) => (
           <motion.div 
             key={item._id || item.id}
