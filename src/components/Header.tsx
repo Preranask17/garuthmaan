@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { client } from "@/sanity/client";
 
 const navItems = [
   { name: "Home", href: "#hero" },
@@ -16,8 +17,11 @@ const navItems = [
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [settings, setSettings] = useState<any>(null);
 
   useEffect(() => {
+    client.fetch(`*[_type == "siteSettings"][0]`).then(setSettings);
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -26,11 +30,7 @@ export default function Header() {
           }
         });
       },
-      {
-        root: null,
-        rootMargin: "-20% 0px -65% 0px",
-        threshold: 0,
-      }
+      { root: null, rootMargin: "-20% 0px -65% 0px", threshold: 0 }
     );
 
     navItems.forEach((item) => {
@@ -40,6 +40,15 @@ export default function Header() {
 
     return () => observer.disconnect();
   }, []);
+
+  const handleSponsorClick = (e: React.MouseEvent) => {
+    if (settings?.sponsorFormUrl) {
+      window.open(settings.sponsorFormUrl, "_blank", "noopener,noreferrer");
+    } else {
+      e.preventDefault();
+      alert("There is no Google Form link configured yet. Please contact the owner of the website for further queries.");
+    }
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 h-20 bg-[#0A0C10] border-b border-white/10 shadow-xl">
@@ -51,7 +60,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Desktop Nav */}
         <div className="hidden md:flex gap-6">
           {navItems.map(item => (
             <motion.a 
@@ -65,10 +73,11 @@ export default function Header() {
           ))}
         </div>
 
-        {/* Action Buttons (Right) */}
         <div className="hidden md:flex gap-3">
-          <a href="#contact" className="btn-glass">Workshop</a>
-          <a href="#contact" className="btn-gold">Join</a>
+          {settings?.workshopFormUrl && (
+             <a href={settings.workshopFormUrl} target="_blank" rel="noopener noreferrer" className="btn-glass">Workshop</a>
+          )}
+          <button onClick={handleSponsorClick} className="btn-gold">Join/Sponsor</button>
         </div>
 
         <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>
@@ -76,7 +85,6 @@ export default function Header() {
         </button>
       </nav>
 
-      {/* Mobile Drawer */}
       <AnimatePresence>
         {isOpen && (
           <motion.div 
