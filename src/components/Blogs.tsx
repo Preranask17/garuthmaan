@@ -7,13 +7,15 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 const sanitizeText = (str: string): string => {
   if (!str) return "";
   return str
-    .replace(/<!\[CDATA\[/gi, "")        .replace(/\]\]>/gi, "")
+    .replace(/<!\[CDATA\[/gi, "")
+    .replace(/\]\]>/gi, "")
     .replace(/<[^>]*>/g, "") // strip HTML tags
-    .replace(/&#8217;|&#39;|&#8216;/g, "'")
+    .replace(/&#8217;|&#8216;/g, "'")
     .replace(/&#8220;|&#8221;/g, '"')
-    .replace(/&#8212;|&#8211;/g, "—")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
+    .replace(/&#8211;/g, "-")
+    .replace(/&#8212;/g, "-")
+    .replace(/&/g, "&")
+    .replace(/"/g, '"')
     .trim();
 };
 
@@ -24,7 +26,7 @@ const defaultGuides = [
   { title: "Carbon Fiber Layup", tag: "BUILD", brief: "Composite techniques for lightweight airframes.", link: "#" }
 ];
 
-export default function Blogs() {
+export default function Blogs({ substackUrl }: { substackUrl?: string }) {
   const [posts, setPosts] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -48,6 +50,11 @@ export default function Blogs() {
 
   const visiblePosts = posts.slice(currentIndex, currentIndex + 3);
 
+  const resolvedSubstackUrl =
+    substackUrl && substackUrl.trim() !== ''
+      ? substackUrl
+      : "https://meeraa13.substack.com";
+
   return (
     <section id="blogs" className="py-20 px-4 max-w-7xl mx-auto">
       <div className="eyebrow text-center mb-2">OPEN NOTES FOR FELLOW BUILDERS</div>
@@ -66,7 +73,7 @@ export default function Blogs() {
                 <h4 className="font-bold text-white mb-2">{post.title}</h4>
                 <p className="text-slate-400 text-xs mb-4">{post.brief}</p>
               </div>
-              <a href={post.link} target="_blank" className="mx-6 mb-6 bg-[#FFD700] text-black font-semibold text-sm px-4 py-2 rounded-full text-center">Read Guide →</a>
+              <a href={post.link} target="_blank" className="mx-6 mb-6 bg-[#FFD700] text-black font-semibold text-sm px-4 py-2 rounded-full text-center">Read Guide</a>
             </motion.div>
           ))}
         </div>
@@ -74,8 +81,16 @@ export default function Blogs() {
         <button onClick={() => setCurrentIndex(Math.min(posts.length - 3, currentIndex + 1))} className="glass-panel p-2 rounded-full hover:bg-white/10"><ChevronRight /></button>
       </div>
 
-      <div className="text-center mt-12">
+      <div className="text-center mt-12 flex flex-col items-center gap-4">
         <button onClick={() => setIsModalOpen(true)} className="bg-[#FFD700] text-black font-semibold px-8 py-3 rounded-full hover:bg-yellow-400 transition-all">View All Blogs</button>
+        <a
+          href={resolvedSubstackUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[#FFD700] text-sm hover:underline"
+        >
+          Visit Substack
+        </a>
       </div>
 
       {/* Modal */}
@@ -97,7 +112,7 @@ export default function Blogs() {
                 {posts.map((post, i) => (
                   <div key={i} className="glass-panel p-4">
                     <h4 className="font-bold mb-2">{post.title}</h4>
-                    <a href={post.link} target="_blank" className="text-[#FFD700] text-sm">Read Guide →</a>
+                    <a href={post.link} target="_blank" className="text-[#FFD700] text-sm">Read Guide</a>
                   </div>
                 ))}
               </div>

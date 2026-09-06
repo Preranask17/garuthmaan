@@ -1,6 +1,7 @@
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import hangarPhoto from './src/sanity/schemaTypes/hangarPhoto';
+import { siteSettings } from './src/sanity/schemaTypes/siteSettings';
 import { projectId, dataset } from './src/sanity/env';
 
 export default defineConfig({
@@ -10,6 +11,6 @@ export default defineConfig({
   dataset,
   plugins: [structureTool()],
   schema: {
-    types: [hangarPhoto],
+    types: [hangarPhoto, siteSettings],
   },
 });
