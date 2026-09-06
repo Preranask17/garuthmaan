@@ -30,7 +30,10 @@ export default async function Home() {
         <Milestones/>
         <Hangar/>
         <Blogs substackUrl={siteSettings?.substackUrl} />
-        <Contact />
+        <Contact
+          joinTeamFormUrl={siteSettings?.joinTeamFormUrl}
+          sponsorFormUrl={siteSettings?.sponsorFormUrl}
+        />
         <Footer
           instagramUrl={siteSettings?.instagramUrl}
           linkedinUrl={siteSettings?.linkedinUrl}
