@@ -1,5 +1,6 @@
 export const revalidate = 0;
 
+import BackgroundSequence from '@/components/BackgroundSequence';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
@@ -18,7 +19,8 @@ export default async function Home() {
   const siteSettings = await getSiteSettings();
 
   return (
-    <main className="bg-[#0A0C10] text-white min-h-screen relative overflow-x-hidden pt-20">
+    <main className="bg-transparent text-white min-h-screen relative overflow-x-hidden pt-20">
+      <BackgroundSequence />
       <div className="relative z-10">
         <Navbar
           workshopFormUrl={siteSettings?.workshopFormUrl}
