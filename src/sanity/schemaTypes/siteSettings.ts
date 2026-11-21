@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity';
 
-export const siteSettings = defineType({
+const siteSettings = defineType({
   name: 'siteSettings',
   title: 'Site Settings & Form Links',
   type: 'document',
@@ -43,5 +43,13 @@ export const siteSettings = defineType({
       title: 'YouTube Channel URL',
       type: 'url',
     }),
+    defineField({
+      name: 'ownerContactEmail',
+      title: 'Owner Contact Email',
+      type: 'string',
+    }),
   ],
 });
+
+export default siteSettings;
+export { siteSettings };

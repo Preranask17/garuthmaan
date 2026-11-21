@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { client } from "@/sanity/client";
 
 // Editable milestone content — update years/titles/descriptions here
 const milestonesData = [
@@ -55,7 +56,17 @@ interface PlanePos {
   angle: number;
 }
 
+type AboutSection = {
+  milestonesTitle?: string;
+};
+
 export default function Milestones() {
+  const [data, setData] = useState<AboutSection | null>(null);
+
+  useEffect(() => {
+    client.fetch(`*[_type == "aboutSection"][0]`).then(setData);
+  }, []);
+
   const sectionRef = useRef<HTMLElement | null>(null);
   const pathRef = useRef<SVGPathElement | null>(null);
   const [plane, setPlane] = useState<PlanePos>({ ...FALLBACK_POINTS[0], angle: 0 });
@@ -109,7 +120,7 @@ export default function Milestones() {
     <section id="milestones" ref={sectionRef} className="py-20 px-4 max-w-7xl mx-auto bg-transparent">
       <div className="eyebrow mb-2">OUR JOURNEY</div>
       <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-10">
-        BUILT ACROSS YEARS, NOT JUST SEASONS
+        {data?.milestonesTitle || "BUILT ACROSS YEARS, NOT JUST SEASONS"}
       </h2>
 
       {/* Curved flight trail with airplane riding the rail */}

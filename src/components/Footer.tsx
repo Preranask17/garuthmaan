@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { client } from "@/sanity/client";
 
 interface FooterProps {
   instagramUrl?: string;
@@ -8,7 +9,19 @@ interface FooterProps {
   youtubeUrl?: string;
 }
 
+type FooterSection = {
+  description?: string;
+  email?: string;
+  copyright?: string;
+};
+
 export default function Footer({ instagramUrl, linkedinUrl, youtubeUrl }: FooterProps) {
+  const [data, setData] = useState<FooterSection | null>(null);
+
+  useEffect(() => {
+    client.fetch(`*[_type == "footerSection"][0]`).then(setData);
+  }, []);
+
   return (
     <footer className="border-t border-white/10 bg-[#0A0C10] py-16 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
@@ -23,7 +36,7 @@ export default function Footer({ instagramUrl, linkedinUrl, youtubeUrl }: Footer
             </div>
           </div>
           <div className="text-[#FFD700] text-xs font-mono tracking-widest uppercase my-3">STUDENTS FIRST. HARDWARE ALWAYS.</div>
-          <p className="text-gray-400 text-sm max-w-xs">A student engineering collective dedicated to designing, testing, and flying custom RC aircraft.</p>
+          <p className="text-gray-400 text-sm max-w-xs">{data?.description || "A student engineering collective dedicated to designing, testing, and flying custom RC aircraft."}</p>
         </div>
 
         {/* Col 2: Navigation */}
@@ -49,9 +62,15 @@ export default function Footer({ instagramUrl, linkedinUrl, youtubeUrl }: Footer
           </ul>
         </div>
 
-        {/* Col 4: Social Media */}
+        {/* Col 4: Contact & Social Media */}
         <div>
-          <h4 className="text-white font-mono text-sm uppercase font-semibold mb-4">Social Media</h4>
+          <h4 className="text-white font-mono text-sm uppercase font-semibold mb-4">Contact</h4>
+          <a href={`mailto:${data?.email || "teamgaruthmaam@jyothyit.ac.in"}`} className="font-mono text-sm text-[#FFD700] hover:underline block mb-2">{data?.email || "teamgaruthmaam@jyothyit.ac.in"}</a>
+          <div className="text-sm text-gray-400 space-y-1 mb-4">
+            <p>Harshini Priya V: +91 99808 55637</p>
+            <p>Achutha A Kaddi: +91 81975 96655</p>
+            <p className="text-xs pt-2">Jyothy Institute of Technology, Bangalore, Karnataka.</p>
+          </div>
           <div className="flex gap-2">
             {instagramUrl && (
               <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="border border-white/10 px-3 py-1 text-xs font-mono text-gray-400 hover:border-[#FFD700] hover:text-[#FFD700] transition-all rounded">
@@ -73,7 +92,7 @@ export default function Footer({ instagramUrl, linkedinUrl, youtubeUrl }: Footer
       </div>
 
       <div className="max-w-7xl mx-auto border-t border-white/5 mt-12 pt-8 flex justify-between items-center text-xs text-gray-500 font-mono">
-        <p>Ac 2026 Team Garuthmaan. All rights reserved.</p>
+        <p>{data?.copyright || "© 2026 Team Garuthmaan. All rights reserved."}</p>
         <p>Jyothy Institute of Technology</p>
       </div>
     </footer>

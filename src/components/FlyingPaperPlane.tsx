@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 function PlaneMesh() {
-  const mesh = useRef<any>();
+  const mesh = useRef<any>(null);
   // Note: /paper_plane.glb must be in the public/ folder. 
   // If unavailable, this will throw an error. 
   // Using a simple box as a placeholder for GLTF loader.
