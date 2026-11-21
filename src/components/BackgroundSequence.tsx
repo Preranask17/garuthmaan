@@ -123,20 +123,16 @@ export default function BackgroundSequence() {
     const loadFrame = (i: number, slot: number, isFirst: boolean) => {
       const primary = upperSrc(i);
       const fallback = lowerSrc(i);
-      console.log(`[BackgroundSequence] loading frame ${i} pad=${pad3(i)} try1="${primary}"`);
       const img = new Image();
       img.onload = () => {
-        console.log(`[BackgroundSequence] loaded frame ${i} from "${img.src}"`);
         slots[slot] = img;
         loaded[slot] = true;
         if (isFirst) renderFrame(0);
         finishOne();
       };
       img.onerror = () => {
-        console.warn(`[BackgroundSequence] 404 on try1 frame ${i}: "${primary}" — retrying "${fallback}"`);
         const retry = new Image();
         retry.onload = () => {
-          console.log(`[BackgroundSequence] loaded frame ${i} from fallback "${retry.src}"`);
           slots[slot] = retry;
           loaded[slot] = true;
           if (isFirst) renderFrame(0);
