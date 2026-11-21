@@ -39,7 +39,7 @@ export async function GET() {
       const content = match[1];
       const title = sanitizeText(content.match(/<title>(.*?)<\/title>/)?.[1] || "Untitled");
       const link = content.match(/<link>(.*?)<\/link>/)?.[1] || "#";
-      const descMatch = content.match(/<description>(.*?)<\/description>/s);
+      const descMatch = content.match(/<description>([\s\S]*?)<\/description>/);
       const snippet = sanitizeText(descMatch ? descMatch[1] : "").substring(0, 150) + "...";
       const image = extractImage(content);
 
